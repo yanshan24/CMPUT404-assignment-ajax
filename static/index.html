@@ -50,11 +50,11 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
         }
     };
     //XXX: POST to a URL
-    xhr.open("POST", url)
+    xhr.open("POST", url);
     xhr.setRequestHeader("Content-Type", "application/json");
     //XXX: set the mimetype and the accept headers!
-    xhr.setRequestHeader("Accept", "application/json")
-    xhr.send(JSON.stringify(objects)
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.send(JSON.stringify(objects));
     // Remember to use application/json !
 }
 
@@ -65,7 +65,7 @@ world = {};
 function drawCircle(context,entity) {
     with(context) {
         beginPath();
-        lineWidth = 3;
+        lineWidth = 5;
         var x = entity["x"];
         var y = entity["y"];
         //moveTo(x,y);
@@ -144,7 +144,7 @@ function addEntity(entity, data) {
     world[entity] = data;
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just modified!
-    sendJSONXMLHTTPRequest("/entity/" + entity, data, null) // /entity/entity-name POST/PUT/GET API
+    sendJSONXMLHTTPRequest("/entity/" + entity, data, null); // /entity/entity-name POST/PUT/GET API
 
 }
 
@@ -254,15 +254,15 @@ mouse = (function() {
 // Add the application specific mouse listeners!
 //XXX: TODO Make these prettier!
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'blue'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'pink'});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'red'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'purple'});
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'green',
+    addEntityWithoutName({'x':x,'y':y,'colour':'white',
                           'radius':10});
 });
 
@@ -271,8 +271,8 @@ function update() {
     //XXX: TODO Get the world from the webservice using a XMLHTTPRequest
     sendJSONXMLHTTPRequest('/world', null, function (data) {
         world = data;
+        drawNextFrame();
     });
-    drawNextFrame();
     drawFrame();
 }
 
